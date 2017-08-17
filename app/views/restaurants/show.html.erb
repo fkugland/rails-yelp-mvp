@@ -1,2 +1,20 @@
-<h2><%= @restaurant.name %></h2>
-<p><%= @restaurant.address %></p>
+<div class="container">
+  <div class="col-md-6 col-md-offset-3">
+    <div class="row" >
+      <h2><%= @restaurant.name %></h2>
+      <p><%= @restaurant.address %></p>
+    </div>
+
+    <div class="row">
+      <% @reviews.each do |review| %>
+      <h3>Rating (0 to 5) = <%= review.rating %></h3>
+      <p><%= review.content %></p>
+      <% end %>
+    </div>
+
+    <div class="row" >
+      <%= link_to "Back to overview", restaurants_path, class: "btn btn-primary" %>
+      <%= link_to "Review", new_restaurant_review_path(@restaurant), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

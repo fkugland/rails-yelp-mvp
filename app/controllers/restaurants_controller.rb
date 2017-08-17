@@ -5,6 +5,7 @@ class RestaurantsController < ApplicationController
 
   def show          # GET /restaurants/:id
     @restaurant = Restaurant.find(params[:id])
+    @reviews = @restaurant.reviews
   end
 
   def new           # GET /restaurants/new
@@ -12,7 +13,7 @@ class RestaurantsController < ApplicationController
   end
 
   def create        # POST /restaurants
-    @restaurant = Restaurant.new(user_params)
+    @restaurant = Restaurant.new(restaurant_params)
     @restaurant.save
     redirect_to restaurant_path(@restaurant)
   end
@@ -23,7 +24,7 @@ class RestaurantsController < ApplicationController
 
   def update        # PATCH /restaurants/:id
     @restaurant = Restaurant.find(params[:id])
-    @restaurant.update(user_params])
+    @restaurant.update(restaurant_params)
     redirect_to restaurant_path(@restaurant)
   end
 
@@ -33,9 +34,7 @@ class RestaurantsController < ApplicationController
     redirect_to restaurants_path
   end
 
-private
-
-  def user_params
-    params.require(:user).permit(:email)
+  def restaurant_params
+    params.require(:restaurant).permit(:name, :address)
   end
 end
